@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Page Title</title>
+
+    <meta charset="utf-8">
+
+    <script src="js/vendor/jquery.min.js"></script>
+    <script src="js/vendor/three.js"></script>
+    <script src="js/vendor/CanvasRenderer.js"></script>
+    <script src="js/vendor/Projector.js"></script>
+    <script src="js/vendor/tween.min.js"></script>
+    <script src="js/vendor/stats.min.js"></script>
+    <script src="js/app.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+</head>
+
+<body>
+<div class="parallax">
+    <!--<div class="vignett"></div>-->
+    <div class="layer l1"></div>
+    <div class="layer l2"></div>
+    <div class="layer l3"></div>
+    <div class="layer l4"></div>
+</div>
+<a href="index.html" class="reload"></a>
+<div id="log">
+    <div class="magnet"></div>
+    <br>
+    <div class="axel"></div>
+    <br>
+    <div class="debug"></div>
+</div>
+<div id="steps">
+    <div class="step-1">
+        <h1>Соберите свой часовой механизм<br><br></h1>
+        <a href="step1" class="btn"><img src="img/btn-begin.png"></a>
+    </div>
+    <div class="step-2">
+        <div class="timer-wrapper">
+            <div class="timer">
+                60
+            </div>
+            <canvas id="circle" width="82" height="82"></canvas>
+        </div>
+    </div>
+    <div class="step-lose">
+        <h1>Время вышло. Попробуйте снова</h1>
+        <a href="index.html" class="btn"><img src="img/btn-again.png"></a>
+    </div>
+    <div class="step-3">
+        <h1>Механизм собран</h1>
+    </div>
+    <div class="step-4">
+        <div class="progress-bar">
+            <div class="progress"></div>
+        </div>
+        <div class="bar"></div>
+        <div class="bg"></div>
+    </div>
+</div>
+<script>
+    var loader = new THREE.XHRLoader();
+    loader.load( 'models/scene.json', function ( text ) {
+
+        var player = new APP.Player();
+        player.load( JSON.parse( text ) );
+        player.setSize( window.innerWidth, window.innerHeight );
+        player.play();
+        document.body.appendChild( player.dom );
+        $(function() {
+            setTimeout(function(){
+                scenario();
+            }, 100)
+        });
+    } );
+
+</script>
+
+</body>
+</html>
